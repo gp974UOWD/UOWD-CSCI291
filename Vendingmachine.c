@@ -23,7 +23,7 @@ float newPriceA; //the price after changing are floating values
 float newPriceB;
 float newPriceC;
 
-float totalSaleA; //the total sales are floating valies
+float totalSaleA; //the total sales are floating values
 float totalSaleB;
 float totalSaleC;
 
