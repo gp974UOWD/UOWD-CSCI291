@@ -15,7 +15,7 @@ void insert_align(int arr[], int length, int pos, int value);
 void reshape(int arr[], int length, int arr2d[nRows][nCols]);
 void print_trans_matrix(int arr2d[nRows][nCols]);
 bool found_duplicate(int arr[], int length);
-int flip_array (int arr[], int length);
+void flip_array (int arr[], int length);
 
 
 int main()
@@ -28,27 +28,31 @@ int main()
     //Part 1
     int arrPart1[SIZE];
     set_array (arrPart1, SIZE);
-    // print_array(arrPart1, SIZE);
+    //print_array(arrPart1, SIZE);
 
     //Part 2
     int arrPart2[SIZE];
     set_array (arrPart2, SIZE);
-    rem_align (arrPart2, SIZE, -4);
-    print_array (arrPart2, SIZE);
+    //rem_align (arrPart2, SIZE, 8);
 
     //Part 3
-
+    int arrPart3[SIZE];
+    set_array (arrPart3, SIZE);
+    //insert_align (arrPart3, SIZE, 4, 90);
 
     //Part 4
-
+    int arrPart4[SIZE];
+    set_array(arrPart4, SIZE);
+    int arr2DPart4[nRows][nCols];
+    //reshape (arrPart4, SIZE, arr2DPart4);
 
     //Part 5
-    int arrPart5[nRows][nCols] = {{1,2,3},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{7,8,9}};
-    // print_trans_matrix(arrPart5);
+    int arrPart5[nRows][nCols] = {{1,2,3},{4,5,6},{7,8,9},{10,11,12},{13,14,15},{16,17,18},{19,20,21},{22,23,24}};
+    //print_trans_matrix(arrPart5);
 
     //Part 6 not complete but almost
-    int arrPart6[SIZE]={1,2,5,4,9,10,6,8,4};
-    int x = found_duplicate(arrPart6,SIZE);
+    int arrPart6[5]={1,2,3,4,5};
+    int x = found_duplicate(arrPart6,5);
     if (x==1){
         printf("True\n");
     }else printf("False\n");
@@ -57,7 +61,7 @@ int main()
     int arrPart7[SIZE];
     set_array(arrPart7,SIZE);
     flip_array(arrPart7, SIZE);
-    // print_array (arrPart7, SIZE);
+    //print_array (arrPart7, SIZE);
 }
 
 
@@ -85,22 +89,51 @@ void set_array(int arr [], int length){
 //Part 2
 void rem_align(int arr[], int length, int pos){
     if (pos>0){
-        for(int i=0; i<length; i++){
-            for (int j=pos; j<length; j++){
-                arr[j] = arr[j+i];
-            }
+        for (int j=pos; j<length; j++){ 
+            arr[j] = arr[pos+1];
+            pos++;
+            arr[length]=arr[length-1];
         }
-    }else printf("Number should be positive.\n");
+        for(int i=0; i<length; i++){
+            printf("array[%d] = %d\n", i, arr[i]);
+        }
+    }else printf("Argument pos should be positive.\n");
 }
 
 //Part 3
 void insert_align(int arr[], int length, int pos, int value){
-    
+    if (pos>0){
+        int temp;
+        int temp2;
+        for (int j=pos; j<length; j++){ 
+            temp=arr[j];
+            arr[j]=temp2;
+            temp2=temp;
+        }
+        arr[pos]=value;
+        for(int i=0; i<length; i++){
+            printf("array[%d] = %d\n", i, arr[i]);
+        }
+    }else printf("Argument pos should be positive.\n");
 }
 
 //Part 4
 void reshape(int arr[], int length, int arr2d[nRows][nCols]){
-
+    if (length==nRows*nCols){
+        for(int i=0; i<nRows; i++){
+            for(int j=0; j<nCols; j++){
+                int arrayindex;
+                arr2d[i][j] = arr[arrayindex];
+                arrayindex++;
+            }
+        }
+        for(int i=0; i<nRows; i++){
+            for(int j=0; j<nCols; j++){
+                printf("%d  ",arr2d[i][j]);
+            }
+        printf("\n");
+        }
+    }else printf("The length of the 1D array should be equal to the rows*columns of the 2D array.\n");
 }
 
 
@@ -123,20 +156,20 @@ void print_trans_matrix(int arr2d[nRows][nCols]){
 //Part 6
 bool found_duplicate(int arr[], int length){
     for(int i=0; i<length; i++) {    
-        for(int j=i+1; j<length; j++) {    
-            if(arr[i] == arr[j]){
+        for(int j=i+1; j<length; j++) {   
+            if(arr[j] == arr[i]){
                 return true;
-            }else return false;
+            }
         }
     }
 }
 
 //Part 7
-int flip_array (int arr[], int length){
-    int x;
+void flip_array (int arr[], int length){
+    int temp;
     for(int i=0; i<length/2; i++){
-        x = arr[i];
+        temp = arr[i];
         arr[i] = arr[length-i-1];
-        arr[length-i-1] = x;
+        arr[length-i-1] = temp;
     }
 }
